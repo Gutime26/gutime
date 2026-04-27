@@ -496,10 +496,8 @@ footer {
   margin: 0 auto;
 }
 
-.footer-brand img {
+.footer-brand > img:first-child {
   height: 44px;
-  filter: brightness(0) invert(1);
-  opacity: .9;
   display: block;
   margin-bottom: 1rem;
 }
@@ -516,6 +514,14 @@ footer {
   opacity: .6;
   line-height: 1.6;
   max-width: 260px;
+}
+
+.footer-loghi {
+  display: block;
+  margin-top: 1.4rem;
+  width: 80%;
+  height: auto;
+  object-fit: contain;
 }
 
 .footer-company {

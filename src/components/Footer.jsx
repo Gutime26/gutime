@@ -8,6 +8,7 @@ export default function Footer() {
           <img src="/logo-gutime_neg.png" alt="GUTIME" />
           <div className="tagline">Gusti Tipici Mediterranei</div>
           <div className="footer-desc">La filiera che unisce la terra, crea valore, arriva a te.</div>
+          <img src="/images/loghi-progetto-white.png" alt="Loghi progetto" className="footer-loghi" />
         </div>
 
         {/* Colonna 2 – Rhaura */}
