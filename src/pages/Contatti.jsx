@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PageHero from '../components/PageHero'
 
-const aziende = [
+const FALLBACK_AZIENDE = [
   {
     nome: "RHEAURA – OP – SOCIETÀ COOPERATIVA AGRICOLA",
     contatti: [
@@ -23,8 +23,16 @@ const aziende = [
 ]
 
 export default function Contatti() {
+  const [aziende, setAziende] = useState(FALLBACK_AZIENDE)
   const [form, setForm] = useState({ nome: '', cognome: '', email: '', telefono: '', messaggio: '', privacy: false })
   const [inviato, setInviato] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/content/contatti')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.aziende?.length) setAziende(data.aziende) })
+      .catch(() => {})
+  }, [])
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target

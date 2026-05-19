@@ -48,7 +48,7 @@ export default function Nav() {
             <li><Link to="/qualita-sostenibilita/impegno-ambientale" onClick={close}>Impegno ambientale</Link></li>
           </ul>
         </li>
-        <li><a href="#" onClick={close}>News &amp; Eventi</a></li>
+        <li><Link to="/news" onClick={close}>News &amp; Eventi</Link></li>
         <li><Link to="/contatti" onClick={close}>Contatti</Link></li>
       </ul>
     </nav>

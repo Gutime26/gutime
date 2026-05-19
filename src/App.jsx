@@ -20,6 +20,9 @@ import ProduzionePrimaria from './pages/ProduzionePrimaria'
 import TrasformazioneCommercializzazione from './pages/TrasformazioneCommercializzazione'
 import RicercaInnovazione from './pages/RicercaInnovazione'
 import CookiePolicy from './pages/CookiePolicy'
+import News from './pages/News'
+import NewsDetail from './pages/NewsDetail'
+import AdminApp from './admin/AdminApp'
 
 function Layout() {
   return (
@@ -64,7 +67,13 @@ const router = createBrowserRouter([
       { path: 'le-aziende/trasformazione-commercializzazione', element: <TrasformazioneCommercializzazione /> },
       { path: 'le-aziende/ricerca-innovazione', element: <RicercaInnovazione /> },
       { path: 'cookie-policy', element: <CookiePolicy /> },
+      { path: 'news', element: <News /> },
+      { path: 'news/:slug', element: <NewsDetail /> },
     ],
+  },
+  {
+    path: '/admin/*',
+    element: <AdminApp />,
   },
 ])
 

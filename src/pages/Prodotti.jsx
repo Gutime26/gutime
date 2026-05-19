@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageHero from '../components/PageHero'
-import { prodotti, garanzie } from '../data/prodotti'
+import { prodotti as prodottiFallback, garanzie } from '../data/prodotti'
 
 function ProdottoSection({ prodotto, reverse }) {
   return (
@@ -33,6 +34,15 @@ function ProdottoSection({ prodotto, reverse }) {
 }
 
 export default function Prodotti() {
+  const [prodotti, setProdotti] = useState(prodottiFallback)
+
+  useEffect(() => {
+    fetch('/api/content/prodotti')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.prodotti?.length) setProdotti(data.prodotti) })
+      .catch(() => {})
+  }, [])
+
   return (
     <>
       <PageHero

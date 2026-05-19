@@ -1,4 +1,6 @@
-const items = [
+import { useState, useEffect } from 'react'
+
+const FALLBACK = [
   { num: '18',   label: 'Aziende in filiera' },
   { num: '100%', label: 'Prodotti tracciabili' },
   { num: 'Sud',  label: 'Italia, origine autentica' },
@@ -6,6 +8,15 @@ const items = [
 ]
 
 export default function Strip() {
+  const [items, setItems] = useState(FALLBACK)
+
+  useEffect(() => {
+    fetch('/api/content/home')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.strip?.length) setItems(data.strip) })
+      .catch(() => {})
+  }, [])
+
   return (
     <div className="strip">
       {items.map((item) => (
