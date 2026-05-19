@@ -34,7 +34,7 @@ export default function AdminNav({ onClose }) {
         <span>GUTIME</span>
         <span className="adm-logo-sub">Admin</span>
       </div>
-      <nav className="adm-nav">
+      <div className="adm-nav">
         <NavLink to="/admin/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={onClose}>
           Dashboard
         </NavLink>
@@ -53,7 +53,7 @@ export default function AdminNav({ onClose }) {
             ))}
           </div>
         ))}
-      </nav>
+      </div>
       <button className="adm-logout" onClick={handleLogout}>Esci</button>
     </aside>
   )
