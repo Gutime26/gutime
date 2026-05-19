@@ -17,10 +17,16 @@ export default function NewsEditor() {
 
   useEffect(() => {
     if (!isNew) {
-      getNewsArticle(id).then(data => {
-        if (data) setForm(data)
-        setLoading(false)
-      })
+      getNewsArticle(id)
+        .then(data => {
+          if (data) setForm(data)
+          else setError('Articolo non trovato.')
+          setLoading(false)
+        })
+        .catch(err => {
+          setError('Errore caricamento: ' + err.message)
+          setLoading(false)
+        })
     }
   }, [id, isNew])
 

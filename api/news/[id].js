@@ -7,10 +7,14 @@ export default async function handler(req, res) {
   const pathname = `news/${id}.json`
 
   if (req.method === 'GET') {
-    const data = await readBlob(pathname)
-    if (!data) return res.status(404).json(null)
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
-    return res.json(data)
+    try {
+      const data = await readBlob(pathname)
+      if (!data) return res.status(404).json(null)
+      res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+      return res.json(data)
+    } catch (err) {
+      return res.status(500).json({ error: err.message })
+    }
   }
 
   if (req.method === 'PUT') {
