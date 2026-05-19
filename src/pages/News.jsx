@@ -31,7 +31,7 @@ export default function News() {
           ) : (
             <div className="news-grid">
               {news.map(n => (
-                <Link key={n.id} to={`/news/${n.slug || n.id}`} className="news-card">
+                <Link key={n.id} to={`/news/${n.id}`} className="news-card">
                   {n.image && <div className="news-card__img"><img src={n.image} alt={n.title} /></div>}
                   <div className="news-card__body">
                     <div className="news-card__date">{n.date}</div>
