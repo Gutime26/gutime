@@ -32,13 +32,11 @@ export default function NewsDetail() {
       <PageHero
         tag="News &amp; Eventi"
         title={article.title}
-        subtitle={article.excerpt}
+        date={article.date}
         img={article.image || '/images/hero-chi-siamo.jpg'}
-        breadcrumb={[{ label: 'News', to: '/news' }, { label: article.title }]}
       />
       <section className="page-section">
         <div className="page-section__inner" style={{ maxWidth: 800 }}>
-          <div style={{ color: '#64748b', marginBottom: '1.5rem', fontSize: '0.9rem' }}>{article.date}</div>
           <div className="news-body" dangerouslySetInnerHTML={{ __html: article.body }} />
           <div style={{ marginTop: '2rem' }}>
             <Link to="/news" className="btn btn-outline">← Torna alle news</Link>

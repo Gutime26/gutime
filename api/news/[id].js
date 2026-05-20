@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     try {
       const data = await readBlob(pathname)
       if (!data) return res.status(404).json(null)
-      res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+      res.setHeader('Cache-Control', 'no-store')
       return res.json(data)
     } catch (err) {
       return res.status(500).json({ error: err.message })

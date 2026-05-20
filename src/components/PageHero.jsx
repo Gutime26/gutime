@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function PageHero({ tag, title, subtitle, img, breadcrumb = [] }) {
+export default function PageHero({ tag, title, subtitle, date, img, breadcrumb = [] }) {
   return (
     <div className="page-hero" style={{ backgroundImage: `url('${img}')` }}>
       <div className="page-hero__overlay" />
@@ -18,6 +18,7 @@ export default function PageHero({ tag, title, subtitle, img, breadcrumb = [] })
         )}
         {tag && <span className="hero-tag">{tag}</span>}
         <h1>{title}</h1>
+        {date && <p className="page-hero__date">{date}</p>}
         {subtitle && <p>{subtitle}</p>}
       </div>
     </div>
