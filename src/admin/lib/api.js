@@ -17,14 +17,6 @@ export function isAuthenticated() {
 }
 
 export async function login(password) {
-  // Dev mode: crea un token fake senza API
-  if (import.meta.env.DEV && password === (import.meta.env.VITE_DEV_PASSWORD || 'gutime2026')) {
-    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
-    const payload = btoa(JSON.stringify({ role: 'admin', exp: Math.floor(Date.now() / 1000) + 28800 }))
-    const token = `${header}.${payload}.dev`
-    localStorage.setItem('adm_token', token)
-    return token
-  }
   const r = await fetch(`${BASE}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
