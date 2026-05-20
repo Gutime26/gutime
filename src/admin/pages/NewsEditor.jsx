@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getNewsArticle, saveNewsArticle } from '../lib/api'
 import ImageUpload from '../components/ImageUpload'
+import RichTextEditor from '../components/RichTextEditor'
 
 const empty = { title: '', slug: '', date: new Date().toISOString().slice(0, 10), excerpt: '', body: '', image: '', published: false }
 
@@ -85,10 +86,11 @@ export default function NewsEditor() {
             <label>Excerpt (anteprima)</label>
             <textarea className="adm-textarea" rows={3} value={form.excerpt} onChange={e => set('excerpt', e.target.value)} />
           </div>
-          <div className="adm-field">
-            <label>Corpo articolo (HTML)</label>
-            <textarea className="adm-textarea" rows={12} value={form.body} onChange={e => set('body', e.target.value)} placeholder="Puoi usare HTML: <p>, <strong>, <ul>, <li>, <h2>, ecc." />
-          </div>
+          <RichTextEditor
+            label="Corpo articolo"
+            value={form.body}
+            onChange={v => set('body', v)}
+          />
         </div>
 
         <div className="adm-card">
