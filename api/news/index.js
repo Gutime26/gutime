@@ -5,7 +5,7 @@ import { readBlob } from '../_lib/blob.js'
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const data = await readBlob('news/index.json')
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+    res.setHeader('Cache-Control', 'no-store')
     return res.json(data || [])
   }
 
