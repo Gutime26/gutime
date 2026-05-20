@@ -32,7 +32,7 @@ export default function NewsDetail() {
       <PageHero
         tag="News &amp; Eventi"
         title={article.title}
-        date={article.date}
+        date={article.date ? article.date.split('-').reverse().join('-') : ''}
         img={article.image || '/images/hero-chi-siamo.jpg'}
       />
       <section className="page-section">
