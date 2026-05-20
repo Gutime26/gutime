@@ -695,6 +695,151 @@
   white-space: nowrap;
 }
 
+/* ===== SIZE PICKER (step 2 del media picker) ===== */
+.adm-modal--size-picker .adm-modal-header {
+  justify-content: space-between;
+}
+
+.adm-modal-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: .85rem;
+  color: var(--adm-accent);
+  padding: .25rem .5rem;
+  border-radius: 4px;
+}
+
+.adm-modal-back:hover { background: #f1f5f9; }
+
+.adm-size-picker {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.adm-size-preview {
+  flex-shrink: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.adm-size-preview img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--adm-border);
+}
+
+.adm-size-preview-name {
+  font-size: 11px;
+  color: var(--adm-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adm-size-options {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.adm-size-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--adm-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: 0;
+}
+
+.adm-size-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .5rem;
+}
+
+.adm-size-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  padding: .6rem .4rem;
+  background: #f8fafc;
+  border: 2px solid var(--adm-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+
+.adm-size-btn:hover { background: #f1f5f9; border-color: #94a3b8; }
+
+.adm-size-btn--active {
+  border-color: var(--adm-accent);
+  background: rgba(59,130,246,.06);
+}
+
+.adm-size-btn-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--adm-text);
+}
+
+.adm-size-btn-px {
+  font-size: .7rem;
+  color: var(--adm-muted);
+}
+
+.adm-size-custom {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.adm-size-custom label {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--adm-text);
+  white-space: nowrap;
+}
+
+.adm-size-custom input {
+  width: 90px;
+  padding: .35rem .6rem;
+  border: 1px solid var(--adm-border);
+  border-radius: 5px;
+  font-size: .9rem;
+  color: var(--adm-text);
+}
+
+.adm-size-custom input:focus {
+  outline: none;
+  border-color: var(--adm-accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+.adm-size-custom-note {
+  font-size: .75rem;
+  color: var(--adm-muted);
+}
+
+.adm-size-proportional {
+  font-size: .75rem;
+  color: var(--adm-muted);
+  margin: 0;
+}
+
+.adm-size-insert {
+  align-self: flex-start;
+  margin-top: .25rem;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .adm-mobile-toggle {

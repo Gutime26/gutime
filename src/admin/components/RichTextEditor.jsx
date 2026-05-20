@@ -45,7 +45,7 @@ export default function RichTextEditor({ value, onChange, label }) {
     setShowPicker(true)
   }
 
-  function handleImageSelect(url) {
+  function handleImageSelect(url, width) {
     setShowPicker(false)
     editorRef.current?.focus()
     if (savedRange.current) {
@@ -53,7 +53,8 @@ export default function RichTextEditor({ value, onChange, label }) {
       sel.removeAllRanges()
       sel.addRange(savedRange.current)
     }
-    document.execCommand('insertImage', false, url)
+    const style = `width:${width}px;height:auto;max-width:100%`
+    document.execCommand('insertHTML', false, `<img src="${url}" style="${style}">`)
     sync()
   }
 
