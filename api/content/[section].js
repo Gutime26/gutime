@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       let body = req.body
       if (typeof body === 'string') body = JSON.parse(body)
       await put(pathname, JSON.stringify(body), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       return res.json({ ok: true })
     } catch (err) {

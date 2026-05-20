@@ -17,12 +17,12 @@ export default async function handler(req, res) {
       const id = Date.now().toString()
       const article = { ...body, id, date: body.date || new Date().toISOString().slice(0, 10) }
       await put(`news/${id}.json`, JSON.stringify(article), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       const index = (await readBlob('news/index.json')) || []
       index.unshift({ id, title: article.title, slug: article.slug || id, date: article.date, excerpt: article.excerpt, image: article.image, published: article.published })
       await put('news/index.json', JSON.stringify(index), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       return res.json(article)
     } catch (err) {

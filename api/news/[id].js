@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       if (typeof body === 'string') body = JSON.parse(body)
       const article = { ...body, id }
       await put(pathname, JSON.stringify(article), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       const index = (await readBlob('news/index.json')) || []
       const summary = { id, title: article.title, slug: article.slug || id, date: article.date, excerpt: article.excerpt, image: article.image, published: article.published }
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       if (idx >= 0) index[idx] = summary
       else index.unshift(summary)
       await put('news/index.json', JSON.stringify(index), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       return res.json(article)
     } catch (err) {
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       if (found) await del(found.url)
       const index = (await readBlob('news/index.json')) || []
       await put('news/index.json', JSON.stringify(index.filter(a => a.id !== id)), {
-        access: 'public', contentType: 'application/json', addRandomSuffix: false,
+        access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true,
       })
       return res.json({ ok: true })
     } catch (err) {
