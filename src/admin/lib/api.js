@@ -85,7 +85,11 @@ export async function saveNewsArticle(id, data) {
 
 export async function deleteNewsArticle(id) {
   const r = await authFetch(`/api/news/${id}`, { method: 'DELETE' })
-  if (!r.ok) throw new Error('Errore eliminazione')
+  if (!r.ok) {
+    let msg = `HTTP ${r.status}`
+    try { const j = await r.json(); msg = j.error || msg } catch {}
+    throw new Error(msg)
+  }
   return r.json()
 }
 
