@@ -95,6 +95,10 @@ export default function RichTextEditor({ value, onChange, label }) {
           <button type="button" title="Elenco numerato" onMouseDown={e => { e.preventDefault(); exec('insertOrderedList') }}>1. Lista</button>
           <button type="button" title="Citazione" onMouseDown={e => { e.preventDefault(); exec('formatBlock', 'blockquote') }}>❝</button>
           <span className="rte-sep" />
+          <button type="button" title="Allinea a sinistra" onMouseDown={e => { e.preventDefault(); exec('justifyLeft') }}>⬱</button>
+          <button type="button" title="Centra" onMouseDown={e => { e.preventDefault(); exec('justifyCenter') }}>☰</button>
+          <button type="button" title="Allinea a destra" onMouseDown={e => { e.preventDefault(); exec('justifyRight') }}>⬰</button>
+          <span className="rte-sep" />
           <button type="button" title="Inserisci link" onMouseDown={handleLink}>🔗 Link</button>
           <button type="button" title="Rimuovi link" onMouseDown={e => { e.preventDefault(); exec('unlink') }}>🔗✕</button>
           <span className="rte-sep" />
