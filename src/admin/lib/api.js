@@ -94,7 +94,7 @@ export async function deleteNewsArticle(id) {
 }
 
 export async function getMedia() {
-  const r = await authFetch('/api/media')
+  const r = await fetch('/api/media')
   if (!r.ok) return []
   return r.json()
 }

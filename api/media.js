@@ -4,11 +4,10 @@ import { verifyAuth } from './_lib/auth.js'
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      await verifyAuth(req)
       const { blobs } = await list({ prefix: 'images/', limit: 100 })
       return res.json(blobs.map(b => ({ url: b.url, pathname: b.pathname, size: b.size, uploadedAt: b.uploadedAt })))
     } catch (err) {
-      return res.status(401).json({ error: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
