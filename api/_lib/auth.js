@@ -5,5 +5,9 @@ export async function verifyAuth(req) {
   if (!auth.startsWith('Bearer ')) throw new Error('unauthorized')
   const token = auth.slice(7)
   const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-  await jwtVerify(token, secret)
+  try {
+    await jwtVerify(token, secret)
+  } catch {
+    throw new Error('unauthorized')
+  }
 }

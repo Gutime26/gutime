@@ -79,7 +79,11 @@ export async function saveNewsArticle(id, data) {
   const url = id ? `/api/news/${id}` : '/api/news'
   const method = id ? 'PUT' : 'POST'
   const r = await authFetch(url, { method, body: JSON.stringify(data) })
-  if (!r.ok) throw new Error('Errore salvataggio')
+  if (!r.ok) {
+    let msg = 'Errore salvataggio'
+    try { const j = await r.json(); msg = j.error || msg } catch {}
+    throw new Error(msg)
+  }
   return r.json()
 }
 
