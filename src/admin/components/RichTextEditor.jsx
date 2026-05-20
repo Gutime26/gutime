@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import MediaPickerModal from './MediaPickerModal'
 
 export default function RichTextEditor({ value, onChange, label }) {
   const editorRef = useRef(null)
   const initialized = useRef(false)
+  const savedRange = useRef(null)
+  const [showPicker, setShowPicker] = useState(false)
 
   // Sync initial/async value into contentEditable (only when it arrives from outside)
   useEffect(() => {
@@ -33,6 +36,25 @@ export default function RichTextEditor({ value, onChange, label }) {
     e.preventDefault()
     const url = window.prompt('URL del link (es. https://…):')
     if (url) exec('createLink', url)
+  }
+
+  function openMediaPicker(e) {
+    e.preventDefault()
+    const sel = window.getSelection()
+    savedRange.current = sel?.rangeCount > 0 ? sel.getRangeAt(0).cloneRange() : null
+    setShowPicker(true)
+  }
+
+  function handleImageSelect(url) {
+    setShowPicker(false)
+    editorRef.current?.focus()
+    if (savedRange.current) {
+      const sel = window.getSelection()
+      sel.removeAllRanges()
+      sel.addRange(savedRange.current)
+    }
+    document.execCommand('insertImage', false, url)
+    sync()
   }
 
   function handleKeyDown(e) {
@@ -75,6 +97,8 @@ export default function RichTextEditor({ value, onChange, label }) {
           <button type="button" title="Inserisci link" onMouseDown={handleLink}>🔗 Link</button>
           <button type="button" title="Rimuovi link" onMouseDown={e => { e.preventDefault(); exec('unlink') }}>🔗✕</button>
           <span className="rte-sep" />
+          <button type="button" title="Inserisci immagine dalla galleria" onMouseDown={openMediaPicker}>🖼 Immagine</button>
+          <span className="rte-sep" />
           <button type="button" title="Rimuovi formattazione" onMouseDown={e => { e.preventDefault(); exec('removeFormat') }}>✕ Fmt</button>
         </div>
         <div
@@ -86,6 +110,13 @@ export default function RichTextEditor({ value, onChange, label }) {
           onKeyDown={handleKeyDown}
         />
       </div>
+
+      {showPicker && (
+        <MediaPickerModal
+          onSelect={handleImageSelect}
+          onClose={() => setShowPicker(false)}
+        />
+      )}
     </div>
   )
 }
